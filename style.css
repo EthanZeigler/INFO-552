@@ -1,0 +1,165 @@
+/* ===== BASE ===== */
+body {
+  margin: 0;
+  background-color: #F9F1E4;
+}
+
+p {
+  font-family: 'Baskerville', Georgia, serif;
+}
+
+img.float-right {
+  float: right;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  max-width: 40%;
+  height: auto;       /* override the hardcoded height attribute */
+}
+
+.content {
+  padding: 1rem;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background-color: #BE675E;
+  padding: 5px;
+  text-align: center;
+  border: 5px double #381C12;
+}
+
+/* ===== NAV ===== */
+.nav {
+  list-style-type: none;
+  margin: 0;
+  margin-bottom: 1rem;
+  padding: 0;
+  overflow: hidden;
+  background-color: #044543;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+li {
+  float: left;
+  border-right: 1px solid #EBE4AC;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: #BE675E;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #EBE4AC;
+}
+
+.active {
+  background-color: #EBE4AC;
+}
+
+/* ===== HEADINGS ===== */
+h1 {
+  color: #EBE4AC;
+  font-family: 'Harrington', cursive;
+  text-align: center;
+}
+
+h2 {
+  color: #381C12;
+  font-family: 'Baskerville', Georgia, serif;
+  margin-left: 20px;
+}
+
+h3 {
+  color: #381C12;
+  font-family: 'Baskerville', Georgia, serif;
+  text-align: center;
+  margin-left: 20px;
+}
+
+h4 {
+  color: #381C12;
+  font-family: 'Baskerville', Georgia, serif;
+  margin-left: 20px;
+}
+
+/* ===== LAYOUT ===== */
+.stuff {
+  margin: auto;
+  width: 80%;
+  padding: 5px;
+  border-right: none;
+}
+
+.column {
+  float: right;
+  padding: 5px;
+}
+
+.column.side {
+  width: 30%;
+  color: #BE675E;
+  font-family: 'Century Gothic', 'Optima', 'Candara', sans-serif;
+  text-align: center;
+  background-color: #044543;
+}
+
+.column.middle {
+  width: 65%;
+  margin-right: 5px;
+}
+
+@media screen and (max-width: 600px) {
+  .column.side,
+  .column.middle {
+    width: 100%;
+  }
+}
+
+/* ===== COMPONENTS ===== */
+.recipe {
+  width: auto;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.pop {
+  display: flex;
+  float: left;
+  font-family: 'Baskerville', Georgia, serif;
+  border-right: none;
+}
+
+.top {
+  color: #044543;
+  font-family: 'Baskerville', Georgia, serif;
+  text-align: center;
+}
+
+.quote > :last-child {
+  padding-left: min(20vw, 200px);
+}
+
+/* ===== FLOATS ===== */
+.brie {
+  float: left;
+}
+
+.hon {
+  float: right;
+}
+
+.cat {
+  float: none;
+  text-align: center;
+}

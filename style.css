@@ -8,14 +8,27 @@ p {
   font-family: 'Baskerville', Georgia, serif;
 }
 
-img.float-right {
-  float: right;
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-  max-width: 40%;
-  height: auto;       /* override the hardcoded height attribute */
+/* floating images in text always have a small margin for readability */
+p > img {
+  margin: 5px;
 }
 
+/* Images with the class float-right, well, float right */
+img.float-right {
+  float: right;
+  height: auto;
+}
+
+img.float-left {
+  float: left;
+  height: auto;
+}
+
+/*
+  Sometimes called a container. Ensures consistent spacing around the
+  page content that's not your headers, nav, footer, etc. Gets put around
+  the content that changes page to page.
+*/
 .content {
   padding: 1rem;
 }
@@ -30,27 +43,30 @@ img.float-right {
 
 /* ===== NAV ===== */
 .nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   list-style-type: none;
   margin: 0;
   margin-bottom: 1rem;
   padding: 0;
-  overflow: hidden;
   background-color: #044543;
   position: sticky;
   top: 0;
   width: 100%;
 }
 
-li {
-  float: left;
+/* Dividing line between links in the navbar */
+.nav li {
   border-right: 1px solid #EBE4AC;
 }
 
-li:last-child {
+/* Except for the last item because that just looks weird */
+.nav li:last-child {
   border-right: none;
 }
 
-li a {
+.nav li a {
   display: block;
   color: #BE675E;
   text-align: center;
@@ -58,7 +74,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.nav li a:hover:not(.active) {
   background-color: #EBE4AC;
 }
 
@@ -73,93 +89,115 @@ h1 {
   text-align: center;
 }
 
-h2 {
-  color: #381C12;
-  font-family: 'Baskerville', Georgia, serif;
-  margin-left: 20px;
-}
-
-h3 {
-  color: #381C12;
-  font-family: 'Baskerville', Georgia, serif;
-  text-align: center;
-  margin-left: 20px;
-}
-
-h4 {
+/*
+  Commas just mean "this css is for more than one selector".
+  AKA "I want these rules to apply to h2, h3, AND h4
+*/
+h2, h3, h4 {
   color: #381C12;
   font-family: 'Baskerville', Georgia, serif;
   margin-left: 20px;
 }
 
 /* ===== LAYOUT ===== */
-.stuff {
-  margin: auto;
-  width: 80%;
-  padding: 5px;
-  border-right: none;
+/* Goes around columnated stuff to set up behavior */
+.columns {
+  display: flex;
+  /* Align the things in a element with class "columns" into a row */
+  flex-direction: row;
+}
+/*
+  The first level below the columns container is the element containing
+  each column, and we want some spacing between the columns.
+  > just means "only the first level inside an element with class columns"
+*/
+.columns > div {
+  margin: 0 1rem;
+}
+/* Remove side-by-side when display is too small */
+@media screen and (max-width: 700px) {
+  .columns {
+    flex-direction: column;
+  }
 }
 
-.column {
-  float: right;
-  padding: 5px;
-}
+/*
+  "flex: n" works by adding up all the numbers for the elements listed in
+  the flexbox to t, then giving each element n/t of the space. If you have a 
+  side and middle col, t would be 1+3=4, so 1=25% and 3=75%
 
+  For a very comprehensive list of these rules, check out
+  https://css-tricks.com/snippets/css/a-guide-to-flexbox/. It's considered
+  the gold standard cheat sheet for this and if I could print it out in an
+  office and hang it I would.
+*/
 .column.side {
-  width: 30%;
+  flex: 1; /* 25% width*/
   color: #BE675E;
   font-family: 'Century Gothic', 'Optima', 'Candara', sans-serif;
   text-align: center;
   background-color: #044543;
+  padding: 3px; /* Text/images dont touch color border */
 }
-
+.column.side h2 {
+  color: #BE675E;
+  font-family: 'Century Gothic', 'Optima', 'Candara', sans-serif;
+  text-align: center;
+}
 .column.middle {
-  width: 65%;
-  margin-right: 5px;
+  flex: 3; /* 75% width */
 }
 
-@media screen and (max-width: 600px) {
-  .column.side,
-  .column.middle {
-    width: 100%;
-  }
-}
-
-/* ===== COMPONENTS ===== */
-.recipe {
-  width: auto;
-  padding: 10px;
-  margin: 10px;
+/* Various things that make text/images centered */
+.centered {
+  align-self: center;
+  margin: auto;
   text-align: center;
 }
 
-.pop {
-  display: flex;
-  float: left;
-  font-family: 'Baskerville', Georgia, serif;
-  border-right: none;
-}
-
+/* ===== COMPONENTS ===== */
 .top {
   color: #044543;
   font-family: 'Baskerville', Georgia, serif;
   text-align: center;
 }
 
+/*
+  Assuming the last thing is always the attribution and giving it an indent
+  of 200 pixels OR 20% of the horizontal width of the screen, whichever is
+  smaller so on mobile it doesn't go too far over.
+*/
 .quote > :last-child {
   padding-left: min(20vw, 200px);
 }
-
-/* ===== FLOATS ===== */
-.brie {
-  float: left;
-}
-
-.hon {
-  float: right;
-}
-
-.cat {
-  float: none;
+.quote h1,
+.quote h2,
+.quote h3,
+.quote h4,
+.quote h5 {
   text-align: center;
+}
+
+/* Row of links */
+.link-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  color: #BE675E;
+  text-align: center;
+  text-decoration: none;
+  padding: 0;
+}
+/*
+  Various centering scenarios, either the list itself is given centered
+  or it's parent element has the centered tag. Handle centering flexbox stuff.
+*/
+.centered .link-row,
+.link-row.centered {
+  align-items: center;
+  justify-content: center; /* this does the heavy lifting */
+}
+.link-row > li {
+  padding: 14px 16px;
 }
